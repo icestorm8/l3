@@ -1,70 +1,24 @@
-# Getting Started with Create React App
+משימה לאחר פסח
+צרו אפלקציית חיפוש תמונות
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+התחברו ל API הבא:
 
-## Available Scripts
+https://pixabay.com/api/?key=34881482-4599ff7bb74449f6f2390708c&q=cats&image_type=photo&pretty=true
 
-In the project directory, you can run:
+יש לשנות את הKEY לפי ה API שנרשמתם בו באתר PIXABAY
+https://pixabay.com/api/docs/
 
-### `npm start`
+ושימו לב שמשתנה ה Q מכיל בתוכו את התמונות שאתם מחפשים
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+צרו קומפנינטת עמוד בשם pixa
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+שתיהיה בנויה מאינפוט וכפתור, ודיב שיציג רשימת תמונות
 
-### `npm test`
+כאשר המשתמש מכניס באינפוט של החיפוש את שם התמונה שהוא מחפש , נניח DOGS הוא ייקבל למטה ברשימה את תמונות הכלבים
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+שימו לב: את התמונות הקומפנינטה תציג יש לקחת כ QUERY STRING מהכתובת למעלה ב URL בשם S
+כלומר אם אני אכנס
+localhost:3000/pixa?s=cats
+אני אקבל רשימת תמונות של חתולים
+יש להציג בכל חיפוש 4 תמונות בשורה , יש להשתשמש בתמונות שמגיעות ממאפיין webformatURL:
+וכאשר לוחצים על התמונה תשלחו בלינק חיצוני (טאב חדש) את המשתמש ללינק של התמונה הענקית שנמצא במאפיין largeImageURL
