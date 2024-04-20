@@ -1,28 +1,45 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import ImageItem from "./ImageItem";
 
 export default function Pixa() {
   const [query, setQuery] = useState("");
   const [image_Arr, setImagw_Arr] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
-    doApi(query);
+    doApi();
   }, []);
+
+  const [searchParams] = useSearchParams();
+  useEffect(() => {
+    doApi();
+  }, [searchParams]);
   const handleSearch = () => {
     // REMOVING WHITE SPACES BEFORE AND AFTER STRING - TRIM()
     // REPLACING ALL SPACES IN THE MIDDLE (EVEN IN CASE OF SEQUENCE) WITH ONE + SIGN - REPLACE(...)
     console.log(query.trim().replace(/\s+/g, "+"));
+    if (query == "") {
+      navigate("/pixa");
+    } else {
+      navigate(`/pixa?s=${query}`);
+    }
   };
   const handleChange = (e) => {
     // on every change of input - saving it to state
     setQuery(e.currentTarget.value);
   };
 
-  const doApi = async (query = "") => {
+  const doApi = async () => {
+    console.log(searchParams.get("s"));
     const key = "34881482-4599ff7bb74449f6f2390708c";
     const url = `https://pixabay.com/api/?key=${key}&image_type=photo&pretty=true`;
-    const urlQuery = `https://pixabay.com/api/?key=${key}&q=cats&image_type=photo&pretty=true`;
-    const res = await fetch(query === "" ? url : urlQuery);
+    const urlQuery = `https://pixabay.com/api/?key=${key}&q=${searchParams.get(
+      "s"
+    )}&image_type=photo&pretty=true`;
+    const res = await fetch(searchParams.get("s") == null ? url : urlQuery);
     const data = await res.json();
-    console.table(data);
+    console.table(data.hits); // check
+    setImagw_Arr(data.hits);
   };
   return (
     <div className="d-flex flex-column gap-2 p-4 mt-4 border">
@@ -38,8 +55,16 @@ export default function Pixa() {
         </button>
       </div>
 
-      <div className="border">
-        <h1>j</h1>
+      <div className="container">
+        {image_Arr.length == 0 ? (
+          <h1>0 results found for search {query}</h1>
+        ) : (
+          <div className="row ">
+            {image_Arr.map((image) => (
+              <ImageItem key={image.id} image={image} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
